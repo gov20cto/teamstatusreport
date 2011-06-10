@@ -1,0 +1,13 @@
+<% @projects.each do |project| %>
+<p>
+<h1><%= project.name %></h1>
+<b>Current Sprint:</b>
+<table width='100%'>
+<% project.stories.each do |story| %>
+<tr>
+<td><%= story.name %><td><td>(<%= story.complexity %>)</td><td><%= story.completed_percent %></td>
+</tr>
+<% end %>
+</table>
+</p>
+<% end %>
