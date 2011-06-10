@@ -4,13 +4,13 @@ class HomeController < ApplicationController
     @projects.each do |project|
       project.stories = ScrumNinja.project_stories('c17bafe18ce469e3a4300873de284dc24e3fcb78',project.id)
       project.card_wall = ScrumNinja.project_card_wall('c17bafe18ce469e3a4300873de284dc24e3fcb78',project.id)
+      project.stories = [] if project.stories.nil?
+      project.card_wall = [] if project.card_wall.nil?
       project.stories.each do |story|
         story.tasks = [];
-        if not project.card_wall.nil? then
-          project.card_wall.each do |task|
-            if(task.story_id == story.id) then
-              story.tasks << task
-            end
+        project.card_wall.each do |task|
+          if(task.story_id == story.id) then
+            story.tasks << task
           end
         end
         total = 0;

@@ -1,13 +1,9 @@
 <% @projects.each do |project| %>
 <p>
-<h1><%= project.name %></h1>
-<b>Current Sprint:</b>
-<table width='100%'>
+<h1><%= project.name %> Update <% %></h1>
+<b>Tasks:</b>
 <% project.stories.each do |story| %>
-<tr>
-<td><%= story.name %><td><td>(<%= story.complexity %>)</td><td><%= story.completed_percent %></td>
-</tr>
+<div class="story_name"><%= story.name %> (<%= story.completed_percent %>% Complete)</div><div class="story_content"><%= story.content.to_s.gsub(/\n/, '<br/>').html_safe %></div>
 <% end %>
-</table>
 </p>
 <% end %>

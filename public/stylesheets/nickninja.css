@@ -1,0 +1,18 @@
+div.story_content {
+	padding-left: 20px;
+	font-size: 12pt;
+}
+div.story_name {
+	padding-top: 20px;
+	font-size: 14pt;
+	font-style: italic;
+	color: #3366FF;
+}
+b {
+	font-size: 16pt;
+	font-style: italic;
+	color: #3366FF;
+}
+table {
+	border:0;
+}
