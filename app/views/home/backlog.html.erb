@@ -1,0 +1,10 @@
+<p>
+<h1>Team Backlog:</h1>
+
+<% @backlog.each do |sprint| %>
+<% sprint.stories.each do |story| %>
+
+<div class=""><%= story.name %></div>
+
+<% end %>
+<% end %>

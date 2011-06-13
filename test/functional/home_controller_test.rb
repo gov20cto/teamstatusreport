@@ -6,4 +6,14 @@ class HomeControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should get backlog" do
+    get :backlog
+    assert_response :success
+  end
+
+  test "should get submit" do
+    get :submit
+    assert_response :success
+  end
+
 end

@@ -2,12 +2,10 @@ class HomeController < ApplicationController
   before_filter :require_granicus_ip!
   
   def index
-    @ip = request.remote_ip
-    client = ScrumNinja::Client.new('c17bafe18ce469e3a4300873de284dc24e3fcb78')
-    @projects = client.projects
+    @projects = @scrumninja.projects
     @projects.each do |project|
-      project.stories = client.project_stories(project.id)
-      project.card_wall = client.project_card_wall(project.id)
+      project.stories = @scrumninja.project_stories(project.id)
+      project.card_wall = @scrumninja.project_card_wall(project.id)
       project.stories = [] if project.stories.nil?
       project.card_wall = [] if project.card_wall.nil?
       project.stories.each do |story|
@@ -29,4 +27,12 @@ class HomeController < ApplicationController
       end
     end
   end
+  
+  def backlog
+    @backlog = @scrumninja.project_backlog(params[:project_id])
+  end
+
+  def submit
+  end
+
 end
