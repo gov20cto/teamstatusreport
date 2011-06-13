@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   def initialize
-    @allowed_ips = ['127.0.0.1','207.7.154','209.237.241']
+    @allowed_ips = ['127.0.0.1','207.7.154','209.237.241','99.180.252']
     @scrumninja = ScrumNinja::Client.new('c17bafe18ce469e3a4300873de284dc24e3fcb78')
     super
   end
