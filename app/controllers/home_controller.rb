@@ -1,9 +1,10 @@
 class HomeController < ApplicationController
   def index
-    @projects = ScrumNinja.projects('c17bafe18ce469e3a4300873de284dc24e3fcb78')
+    client = ScrumNinja::Client.new('c17bafe18ce469e3a4300873de284dc24e3fcb78')
+    @projects = client.projects
     @projects.each do |project|
-      project.stories = ScrumNinja.project_stories('c17bafe18ce469e3a4300873de284dc24e3fcb78',project.id)
-      project.card_wall = ScrumNinja.project_card_wall('c17bafe18ce469e3a4300873de284dc24e3fcb78',project.id)
+      project.stories = client.project_stories(project.id)
+      project.card_wall = client.project_card_wall(project.id)
       project.stories = [] if project.stories.nil?
       project.card_wall = [] if project.card_wall.nil?
       project.stories.each do |story|

@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Nickninja::Application.load_tasks
+TeamStatusReport::Application.load_tasks
