@@ -1,5 +1,8 @@
 class HomeController < ApplicationController
+  before_filter :require_granicus_ip!
+  
   def index
+    @ip = request.remote_ip
     client = ScrumNinja::Client.new('c17bafe18ce469e3a4300873de284dc24e3fcb78')
     @projects = client.projects
     @projects.each do |project|
