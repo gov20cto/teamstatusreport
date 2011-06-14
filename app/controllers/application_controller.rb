@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   
   def initialize
-    @allowed_ips = ENV['ALLOWED_IPS'].split(',')
-    @scrumninja = ScrumNinja::Client.new(ENV['SCRUMNINJA_KEY'])
+    @allowed_ips = APP_CONFIG['allowed_ip'].split(',')
+    @scrumninja = ScrumNinja::Client.new(APP_CONFIG['scrumninja'])
     super
   end
   

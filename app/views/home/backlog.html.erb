@@ -4,7 +4,6 @@
 <% @backlog.each do |sprint| %>
 <% sprint.stories.each do |story| %>
 
-<div class=""><%= story.name %></div>
-
+<div class=""><%= story.name %></div><div style="display:none;"><%= story.content %></div>
 <% end %>
 <% end %>

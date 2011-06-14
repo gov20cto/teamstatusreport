@@ -1,0 +1,14 @@
+development:
+  scrumninja: a0d550405d37584fff59dd9e86cbe0cd88188e35
+  allowed_ip: 127.0.0.1
+  ignore_projects: TeamReport
+  
+test:
+  scrumninja: a0d550405d37584fff59dd9e86cbe0cd88188e35
+  allowed_ip: 127.0.0.1
+  ignore_projects: TeamReport
+
+production:
+  scrumninja: <%= ENV['SCRUMNINJA_KEY'] %>
+  allowed_ip: <%= ENV['ALLOWED_IPS'] %>
+  ignore_projects: <%= ENV['IGNORE_PROJECTS'] %>
