@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
-  before_filter :require_granicus_ip!
+  before_filter :require_allowed_ip!
   
   def index
-    @projects = @scrumninja.projects
+    @projects = @scrumninja.projects.find_all {|project| !ENV['IGNORE_PROJECTS'].split(,).include? project.id }
     @projects.each do |project|
       project.stories = @scrumninja.project_stories(project.id)
       project.card_wall = @scrumninja.project_card_wall(project.id)

@@ -1,5 +1,4 @@
 <% @projects.each do |project| %>
-<% if project.name != "TeamReport" %>
 <h1><%= project.name %> Team Status</h1>
 [ <%= link_to "Backlog", :controller => "home", :action => "backlog", :project_id => project.id %> ]
 <p>
@@ -8,5 +7,4 @@
 <div class="story_name"><%= story.name %><!-- (<%= story.completed_percent %>% Complete) --></div><div class="story_content"><%= story.content.to_s.gsub(/\n/, '<br/>').html_safe %></div>
 <% end %>
 </p>
-<% end %>
 <% end %>

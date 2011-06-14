@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
   
   def initialize
-    @allowed_ips = ['127.0.0.1','207.7.154','209.237.241','99.180.252']
-    @scrumninja = ScrumNinja::Client.new('c17bafe18ce469e3a4300873de284dc24e3fcb78')
+    @allowed_ips = ENV['ALLOWED_IPS'].split(',')
+    @scrumninja = ScrumNinja::Client.new(ENV['SCRUMNINJA_KEY'])
     super
   end
   
-  def require_granicus_ip!
+  def require_allowed_ip!
     allowed = false
     @allowed_ips.each do |ip|
       allowed = true if request.remote_ip.starts_with? ip
