@@ -5,7 +5,7 @@
 <p>
 <b>Tasks:</b>
 <% project.stories.each do |story| %>
-<div class="story_name"><%= story.name %> (<%= story.completed_percent %>% Complete)</div><div class="story_content"><%= story.content.to_s.gsub(/\n/, '<br/>').html_safe %></div>
+<div class="story_name"><%= story.name %><!-- (<%= story.completed_percent %>% Complete) --></div><div class="story_content"><%= story.content.to_s.gsub(/\n/, '<br/>').html_safe %></div>
 <% end %>
 </p>
 <% end %>
