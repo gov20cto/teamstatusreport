@@ -12,7 +12,7 @@ var Burndown = function(dom_id) {
     // Set the data for the chart
     this.data = json;
 	this.sprint_start = start;
-	this.sprint_length = length -1;
+	this.sprint_length = length - 1;
     return this;
   };
 

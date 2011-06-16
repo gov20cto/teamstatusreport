@@ -22,8 +22,8 @@ class HomeController < ApplicationController
       start_date = project.sprints[0].starts_on.to_date
       end_date =  project.sprints[0].ends_on.to_date
       
-      project.sprint_start = start_date.to_time.to_i * 1000 + (24 * 3600 * 1000)
-      project.sprint_length = (end_date - start_date).to_i
+      project.sprint_start = start_date.to_time.to_i * 1000
+      project.sprint_length = (end_date - start_date).to_i + 1
       days_passed = (Date.today - start_date).to_i + 1
       # for each day in the sprint
       project.backlog = []
