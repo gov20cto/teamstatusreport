@@ -1,10 +1,18 @@
 <% @projects.each do |project| %>
 <h1><%= project.name %> Team Status</h1>
+<script type="text/javascript">
+    $( function() {
+      var entries<%= project.id %> = [ <% project.backlog.each do |count| %>{ "count" : <%= count %> },<% end %> ];
+      Burndown('burndown-<%= project.id %>').data(<%= project.sprint_start %>,<%= project.sprint_length %>,entries<%= project.id %>).draw();
+    });
+  </script>
+<div id="burndown-<%= project.id %>"></div>
+<p>
 [ <%= link_to "Backlog", :controller => "home", :action => "backlog", :project_id => project.id %> ]
 <p>
 <b>Tasks:</b>
 <% project.stories.each do |story| %>
-<div class="story_name"><%= story.name %><!-- (<%= story.completed_percent %>% Complete) --></div><div class="story_content"><%= story.content.to_s.gsub(/\n/, '<br/>').html_safe %></div>
+<div class="story_name"><%= story.name %></div><div class="story_content"><%= story.content.to_s.gsub(/\n/, '<br/>').html_safe %></div>
 <% end %>
 </p>
 <% end %>

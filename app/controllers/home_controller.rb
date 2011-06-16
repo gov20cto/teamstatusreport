@@ -10,26 +10,46 @@ class HomeController < ApplicationController
       end
     end
     @projects.each do |project|
-      project.stories = @scrumninja.project_stories(project.id)
-      project.card_wall = @scrumninja.project_card_wall(project.id)
+      project.estimates = []
+      project.stories = @scrumninja.project_stories project.id
+      project.card_wall = @scrumninja.project_card_wall project.id 
+      project.sprints = @scrumninja.project_sprints project.id
+      
       project.stories = [] if project.stories.nil?
       project.card_wall = [] if project.card_wall.nil?
-      project.stories.each do |story|
-        story.tasks = [];
+      project.sprints = [] if project.sprints.nil?
+      
+      start_date = project.sprints[0].starts_on.to_date
+      end_date =  project.sprints[0].ends_on.to_date
+      
+      project.sprint_start = start_date.to_time.to_i * 1000 + (24 * 3600 * 1000)
+      project.sprint_length = (end_date - start_date).to_i
+      days_passed = (Date.today - start_date).to_i + 1
+      # for each day in the sprint
+      project.backlog = []
+      days_passed.times do |i|
+        start_time = (start_date + i).to_time
+        end_time = (start_date + i + 1).to_time
+        total_hours = 0
         project.card_wall.each do |task|
-          if(task.story_id == story.id) then
-            story.tasks << task
+          if task.created_at < end_time
+            if task.done_at.nil? or task.done_at > end_time
+              # we have a task that counts towards today, dig into estimates
+              if task.estimates.estimate.is_a? Array then
+                estimate_hours = 0
+                task.estimates.estimate.each do |estimate|
+                  estimate_day = estimate.date.to_date
+                  break if(estimate_day.to_time > end_time)
+                  estimate_hours = task.estimates.estimate[0].hours.to_f
+                end
+                total_hours += estimate_hours
+              else
+                total_hours += task.estimates.estimate.hours.to_f
+              end
+            end
           end
         end
-        total = 0;
-        completed = 0;
-        story.tasks.each do |task|
-          total = total + 1
-          completed = completed + 1 if task.status == "done"
-        end
-        story.total_tasks = total;
-        story.completed_tasks = completed;
-        story.completed_percent = (total == 0) ? 0 : ((completed.to_f / total.to_f) * 100).floor
+        project.backlog << total_hours
       end
     end
   end
@@ -40,5 +60,13 @@ class HomeController < ApplicationController
 
   def submit
   end
-
+  
+  private 
+  
+  def add_estimate(project,est)
+    stamp = Date.parse(est.date).to_time.to_i * 1000
+    project.estimates[stamp] = 0 if project.estimates[stamp].nil?
+    project.estimates[stamp] = project.estimates[stamp] + est.hours.to_f
+  end
+  
 end
