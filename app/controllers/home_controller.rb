@@ -19,7 +19,7 @@ class HomeController < ApplicationController
       project.sprints = @scrumninja.project_sprints project.id
       
       project.stories = [] if project.stories.nil?
-      project.burndown = get_project_burndown(project)
+      project.burndown = get_project_burndown project.id
     end
   end
   

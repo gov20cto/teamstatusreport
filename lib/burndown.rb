@@ -1,14 +1,14 @@
 module ScrumNinja::Burndown
-  def get_project_burndown(project)
+  def get_project_burndown(project_id)
     burndown = {}
-    project.card_wall = @scrumninja.project_card_wall project.id 
-    project.sprints = @scrumninja.project_sprints project.id
+    card_wall = @scrumninja.project_card_wall project_id 
+    sprints = @scrumninja.project_sprints project_id
     
-    project.card_wall = [] if project.card_wall.nil?
-    project.sprints = [] if project.sprints.nil?
+    card_wall = [] if card_wall.nil?
+    sprints = [] if sprints.nil?
     
-    start_date = project.sprints[0].starts_on.to_date
-    end_date =  project.sprints[0].ends_on.to_date
+    start_date = sprints[0].starts_on.to_date
+    end_date =  sprints[0].ends_on.to_date
     
     burndown[:start] = start_date.to_time.to_i * 1000
     burndown[:length] = (end_date - start_date).to_i + 1
@@ -19,7 +19,7 @@ module ScrumNinja::Burndown
       start_time = (start_date + i).to_time
       end_time = (start_date + i + 1).to_time
       total_hours = 0
-      project.card_wall.each do |task|
+      card_wall.each do |task|
         if task.created_at < end_time
           if task.done_at.nil? or task.done_at > end_time
             # we have a task that counts towards today, dig into estimates
