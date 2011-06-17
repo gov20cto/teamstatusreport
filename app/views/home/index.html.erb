@@ -2,8 +2,8 @@
 <h1><%= project.name %> Team Status</h1>
 <script type="text/javascript">
     $( function() {
-      var entries<%= project.id %> = [ <% project.burndown[:estimates].each do |count| %>{ "count" : <%= count %> },<% end %> ];
-      Burndown('burndown-<%= project.id %>').data(<%= project.burndown[:start] %>,<%= project.burndown[:length] %>,entries<%= project.id %>).draw();
+      var entries<%= project.id %> = [ <% project.burndown.estimates.each do |count| %>{ "count" : <%= count %> },<% end %> ];
+      Burndown('burndown-<%= project.id %>').data(<%= project.burndown.start %>,<%= project.burndown.sprint_length %>,entries<%= project.id %>).draw();
     });
   </script>
 <div id="burndown-<%= project.id %>"></div>

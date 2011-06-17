@@ -1,7 +1,4 @@
-require 'burndown'
-
 class HomeController < ApplicationController
-  include ScrumNinja::Burndown
   before_filter :require_allowed_ip!
   
   def index
@@ -15,11 +12,9 @@ class HomeController < ApplicationController
     @projects.each do |project|
       project.estimates = []
       project.stories = @scrumninja.project_stories project.id
-      project.card_wall = @scrumninja.project_card_wall project.id 
-      project.sprints = @scrumninja.project_sprints project.id
-      
+       
       project.stories = [] if project.stories.nil?
-      project.burndown = get_project_burndown project.id
+      project.burndown = @scrumninja.project_burndown project.id
     end
   end
   
