@@ -3,6 +3,12 @@ class ApplicationController < ActionController::Base
   def initialize
     @allowed_ips = APP_CONFIG['allowed_ip'].split(',')
     @scrumninja = ScrumNinja::Client.new(APP_CONFIG['scrumninja'])
+    @project_map = {
+      "platform" => "PT",
+      "meeting efficiency" => "ME",
+      "citizen participation" => "CP",
+      "legislative management" => "LM",
+    }
     super
   end
   
