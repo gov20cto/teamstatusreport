@@ -1,14 +1,11 @@
 development:
   scrumninja: c17bafe18ce469e3a4300873de284dc24e3fcb78
   allowed_ip: 127.0.0.1
-  ignore_projects: 9011
   
 test:
   scrumninja: a0d550405d37584fff59dd9e86cbe0cd88188e35
   allowed_ip: 127.0.0.1
-  ignore_projects: 9011
 
 production:
   scrumninja: <%= ENV['SCRUMNINJA_KEY'] %>
   allowed_ip: <%= ENV['ALLOWED_IPS'] %>
-  ignore_projects: <%= ENV['IGNORE_PROJECTS'] %>

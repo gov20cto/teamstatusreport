@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_filter :require_allowed_ip!
   
   def index
+    @projects = @scrumninja.projects
     @projects.each do |project|
       next unless @project_map.keys.include? project.name.downcase
       project.estimates = []
