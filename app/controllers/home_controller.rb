@@ -10,6 +10,7 @@ class HomeController < ApplicationController
        
       project.stories = [] if project.stories.nil?
       project.burndown = @scrumninja.project_burndown project.id
+      project.burndown = {} if project.burndown.nil?
       project.burndown.estimates = [] if project.burndown.estimates.nil?
     end
   end
